@@ -64,7 +64,7 @@ export function setAuthCookie(res, token) {
   res.cookie('token', token, {
     httpOnly: true,
     secure: isProduction,
-    sameSite: 'lax',
+    sameSite: isProduction ? 'none' : 'lax',
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
     path: '/',
   });
@@ -78,7 +78,7 @@ export function clearAuthCookie(res) {
   res.clearCookie('token', {
     httpOnly: true,
     secure: isProduction,
-    sameSite: 'lax',
+    sameSite: isProduction ? 'none' : 'lax',
     path: '/',
   });
 }

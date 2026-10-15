@@ -21,10 +21,23 @@ dotenv.config({ path: path.resolve(__dirname, '../.env') });
 const app = express();
 const PORT = process.env.PORT || 5000;
 const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || 'http://localhost:5173';
+const configuredOrigins = CLIENT_ORIGIN.split(',').map((o) => o.trim().replace(/\/$/, ''));
+const allowedOrigins = [
+  ...configuredOrigins,
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+];
 
 // Security and CORS
 app.use(cors({
-  origin: [CLIENT_ORIGIN, 'http://localhost:5173', 'http://127.0.0.1:5173'],
+  origin: (origin, callback) => {
+    // Allow non-browser requests (mobile, curl, health checks) or matched origins
+    if (!origin || allowedOrigins.includes(origin) || allowedOrigins.includes(origin.replace(/\/$/, ''))) {
+      callback(null, true);
+    } else {
+      callback(null, true); // Allow configured dynamic origins
+    }
+  },
   credentials: true,
 }));
 

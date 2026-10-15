@@ -14,8 +14,7 @@ import {
 import { useAuth } from '../context/AuthContext.jsx';
 import DisclaimerBanner from '../components/DisclaimerBanner.jsx';
 import { getTranslation } from '../i18n/translations.js';
-
-const API_BASE = 'http://localhost:5000/api';
+import { API_BASE } from '../config/api.js';
 
 export default function HistoryPage({ language = 'en', onSelectSession }) {
   const [sessions, setSessions] = useState([]);

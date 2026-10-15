@@ -10,8 +10,7 @@ import RegisterPage from './pages/RegisterPage.jsx';
 import HistoryPage from './pages/HistoryPage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import { getTranslation } from './i18n/translations.js';
-
-const API_BASE = 'http://localhost:5000/api';
+import { API_BASE } from './config/api.js';
 
 /**
  * Route wrapper for standalone or linked Doctor Summary page

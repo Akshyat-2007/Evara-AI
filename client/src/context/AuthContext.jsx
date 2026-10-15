@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
-
-const API_BASE = 'http://localhost:5000/api';
+import { API_BASE } from '../config/api.js';
 
 const AuthContext = createContext(null);
 

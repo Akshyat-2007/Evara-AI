@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ArrowLeft, Printer, ShieldAlert, AlertTriangle, CheckCircle, Stethoscope, FileText, HelpCircle, Activity, Calendar, Lock } from 'lucide-react';
 import { getTranslation } from '../i18n/translations.js';
+import { API_BASE } from '../config/api.js';
 
 export default function DoctorSummary({ sessionId, language = 'en', onBackToChat }) {
   const [report, setReport] = useState(null);
@@ -14,7 +15,7 @@ export default function DoctorSummary({ sessionId, language = 'en', onBackToChat
       if (!sessionId) return;
       try {
         setLoading(true);
-        const res = await fetch(`http://localhost:5000/api/report/${sessionId}`);
+        const res = await fetch(`${API_BASE}/report/${sessionId}`);
         if (!res.ok) {
           throw new Error('Failed to load doctor summary report.');
         }
